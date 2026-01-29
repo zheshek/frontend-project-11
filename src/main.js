@@ -1,8 +1,17 @@
+import i18next from 'i18next';
+import resources from './locales/ru.js';
 import './style.css';
 import onChange from 'on-change';
 import initView from './view.js';
 import validate from './validator.js';
 
+i18next.init({
+  lng: 'ru',
+  debug: false,
+  resources: {
+    ru: resources,
+  },
+});
 const state = {
   form: {
     status: 'filling', // filling | error | valid
