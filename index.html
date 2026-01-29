@@ -9,19 +9,19 @@
   <body>
   <div class="container mt-5">
     <h1 class="mb-4">RSS агрегатор</h1>
-
     <form class="d-flex gap-2">
       <input
         type="text"
+        name="url"
         class="form-control"
         placeholder="Ссылка на RSS"
+        required
       />
       <button type="submit" class="btn btn-primary">
         Добавить
       </button>
     </form>
   </div>
-
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
