@@ -1,3 +1,4 @@
+import updateFeeds from './updater.js';
 import i18next from 'i18next';
 import onChange from 'on-change';
 
@@ -40,6 +41,7 @@ const elements = {
 // watcher
 const watchedState = onChange(state, initView(elements));
 
+updateFeeds(watchedState);
 // submit
 elements.form.addEventListener('submit', (e) => {
   e.preventDefault();
