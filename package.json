@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "eslint": "^8.57.1",
     "vite": "^7.2.4"
   },
   "dependencies": {
