@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -15,12 +15,16 @@
         name="url"
         class="form-control"
         placeholder="RSS URL"
+        aria-label="RSS URL"
         required
       />
       <button type="submit" class="btn btn-primary">
         Добавить
       </button>
     </form>
+      <div id="feeds" class="mt-4"></div>
+      <ul id="posts" class="mt-4"></ul>
+    </div>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>
