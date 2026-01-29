@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import { Modal } from 'bootstrap';
 
 const renderFeeds = (feeds) => {
   const container = document.querySelector('#feeds');
@@ -17,8 +18,9 @@ const renderPosts = (posts, viewedPosts) => {
 
   posts.forEach(({ id, title, link }) => {
     const li = document.createElement('li');
-    const a = document.createElement('a');
+    li.classList.add('d-flex', 'justify-content-between', 'align-items-start');
 
+    const a = document.createElement('a');
     a.href = link;
     a.textContent = title;
     a.target = '_blank';
@@ -29,13 +31,31 @@ const renderPosts = (posts, viewedPosts) => {
       a.classList.add('fw-bold');
     }
 
-    li.append(a);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.classList.add('btn', 'btn-sm', 'btn-outline-primary');
+    button.textContent = 'Просмотр';
+    button.dataset.id = id;
+
+    li.append(a, button);
     container.append(li);
   });
 };
 
-export default (elements) => (path, value, previousValue, state) => {
-  const { input } = elements;
+const renderModal = (state, modalElement) => {
+  const post = state.posts.find((p) => p.id === state.ui.activePostId);
+  if (!post) return;
+
+  modalElement.querySelector('.modal-title').textContent = post.title;
+  modalElement.querySelector('.modal-body').textContent = post.description ?? '';
+  modalElement.querySelector('.modal-footer a').href = post.link;
+
+  const modal = new Modal(modalElement);
+  modal.show();
+};
+
+export default (elements, state) => (path, value) => {
+  const { input, modal } = elements;
 
   if (path === 'form.status') {
     if (value === 'error') {
@@ -65,5 +85,9 @@ export default (elements) => (path, value, previousValue, state) => {
 
   if (path === 'posts' || path === 'ui.viewedPosts') {
     renderPosts(state.posts, state.ui.viewedPosts);
+  }
+
+  if (path === 'ui.activePostId') {
+    renderModal(state, modal);
   }
 };

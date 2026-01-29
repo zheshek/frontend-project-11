@@ -29,6 +29,7 @@ const state = {
   posts: [],
    ui: {
     viewedPosts: [],
+    activePostId: null,
   },
 };
 
@@ -36,12 +37,36 @@ const state = {
 const elements = {
   form: document.querySelector('form'),
   input: document.querySelector('input'),
+  modal: document.querySelector('#modal'),
 };
 
 // watcher
-const watchedState = onChange(state, initView(elements));
+const watchedState = onChange(state, initView(elements, state));
+
+elements.input.addEventListener('input', () => {
+  watchedState.form.error = null;
+  watchedState.form.status = 'filling';
+  elements.input.setCustomValidity('');
+});
 
 updateFeeds(watchedState);
+const postsContainer = document.querySelector('#posts');
+
+postsContainer.addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') {
+    return;
+  }
+
+  const postId = e.target.dataset.id;
+
+  // помечаем как прочитанный
+  if (!watchedState.ui.viewedPosts.includes(postId)) {
+    watchedState.ui.viewedPosts.push(postId);
+  }
+
+  // открываем модалку
+  watchedState.ui.activePostId = postId;
+});
 // submit
 elements.form.addEventListener('submit', (e) => {
   e.preventDefault();
