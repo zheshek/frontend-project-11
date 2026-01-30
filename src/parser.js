@@ -3,15 +3,22 @@ export default (data) => {
   const doc = parser.parseFromString(data, 'application/xml');
 
   if (doc.querySelector('parsererror')) {
-    throw new Error('errors.parseError');
+    throw new Error('parseError');
+  }
+
+  const channel = doc.querySelector('channel');
+  const items = doc.querySelectorAll('item');
+
+  if (!channel || items.length === 0) {
+    throw new Error('parseError');
   }
 
   const feed = {
-    title: doc.querySelector('channel > title')?.textContent,
-    description: doc.querySelector('channel > description')?.textContent,
+    title: channel.querySelector('title')?.textContent,
+    description: channel.querySelector('description')?.textContent,
   };
 
-  const posts = Array.from(doc.querySelectorAll('item')).map((item) => ({
+  const posts = Array.from(items).map((item) => ({
     title: item.querySelector('title')?.textContent,
     link: item.querySelector('link')?.textContent,
   }));
