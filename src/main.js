@@ -15,21 +15,21 @@ i18next.init({
   lng: 'ru',
   debug: false,
   resources: {
-    ru: resources
-  }
+    ru: resources,
+  },
 })
 
 const state = {
   form: {
     status: 'filling', // filling | loading | error | valid
-    error: null
+    error: null,
   },
   feeds: [],
   posts: [],
   ui: {
     viewedPosts: [],
-    activePostId: null
-  }
+    activePostId: null,
+  },
 }
 
 // DOM
@@ -37,7 +37,7 @@ const elements = {
   form: document.querySelector('form'),
   input: document.querySelector('input[name="url"]'),
   feedback: document.querySelector('.feedback'),
-  modal: document.querySelector('#modal')
+  modal: document.querySelector('#modal'),
 }
 
 // watcher
@@ -53,7 +53,7 @@ updateFeeds(watchedState)
 
 const postsContainer = document.querySelector('#posts')
 
-postsContainer.addEventListener('click', e => {
+postsContainer.addEventListener('click', (e) => {
   if (e.target.tagName !== 'BUTTON') {
     return
   }
@@ -68,7 +68,7 @@ postsContainer.addEventListener('click', e => {
 })
 
 // submit
-elements.form.addEventListener('submit', e => {
+elements.form.addEventListener('submit', (e) => {
   e.preventDefault()
 
   const url = elements.input.value.trim()
@@ -78,7 +78,7 @@ elements.form.addEventListener('submit', e => {
 
   validate(url, existingUrls)
     .then(() => fetchRss(url))
-    .then(response => {
+    .then((response) => {
       const { feed, posts } = parseRss(response.data.contents)
       const feedId = crypto.randomUUID()
 
@@ -86,7 +86,7 @@ elements.form.addEventListener('submit', e => {
         id: feedId,
         url,
         title: feed.title,
-        description: feed.description
+        description: feed.description,
       })
 
       const postsWithIds = posts.map(post => ({
@@ -94,7 +94,7 @@ elements.form.addEventListener('submit', e => {
         feedId,
         title: post.title,
         link: post.link,
-        description: post.description
+        description: post.description,
       }))
 
       watchedState.posts.push(...postsWithIds)
@@ -102,12 +102,13 @@ elements.form.addEventListener('submit', e => {
       watchedState.form.status = 'valid'
       watchedState.form.error = null
     })
-    .catch(err => {
+    .catch((err) => {
       let errorKey = 'errors.network'
 
       if (err.name === 'ValidationError') {
         errorKey = err.message
-      } else if (err.message === 'parseError') {
+      }
+       else if (err.message === 'parseError') {
         errorKey = 'errors.parseError'
       }
 

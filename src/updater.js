@@ -1,7 +1,7 @@
 import { fetchRss } from './api.js'
 import parseRss from './parser.js'
 
-const updateFeeds = state => {
+const updateFeeds = (state) => {
   const promises = state.feeds.map(feed =>
     fetchRss(feed.url)
       .then(response => parseRss(response.data.contents))

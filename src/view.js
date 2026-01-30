@@ -1,7 +1,7 @@
 import i18next from 'i18next'
 import { Modal } from 'bootstrap'
 
-const renderFeeds = feeds => {
+const renderFeeds = (feeds) => {
   const container = document.querySelector('#feeds')
   container.innerHTML = ''
 
@@ -28,7 +28,8 @@ const renderPosts = (posts, viewedPosts) => {
 
     if (viewedPosts.includes(id)) {
       a.classList.add('fw-normal', 'text-muted')
-    } else {
+    } 
+    else {
       a.classList.add('fw-bold')
     }
 

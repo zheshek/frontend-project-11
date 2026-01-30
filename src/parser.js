@@ -1,4 +1,4 @@
-export default data => {
+export default (data) => {
   const parser = new DOMParser()
   const doc = parser.parseFromString(data, 'application/xml')
 
@@ -26,4 +26,3 @@ export default data => {
 
   return { feed, posts }
 }
-
