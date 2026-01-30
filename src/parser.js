@@ -18,10 +18,11 @@ export default (data) => {
     description: channel.querySelector('description')?.textContent,
   };
 
-  const posts = Array.from(items).map((item) => ({
-    title: item.querySelector('title')?.textContent,
-    link: item.querySelector('link')?.textContent,
-  }));
+ const posts = Array.from(doc.querySelectorAll('item')).map((item) => ({
+  title: item.querySelector('title')?.textContent,
+  link: item.querySelector('link')?.textContent,
+  description: item.querySelector('description')?.textContent,
+}));
 
   return { feed, posts };
 };

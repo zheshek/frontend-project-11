@@ -96,6 +96,7 @@ elements.form.addEventListener('submit', (e) => {
         feedId,
         title: post.title,
         link: post.link,
+        description: post.description,
       }));
 
       watchedState.posts.push(...postsWithIds);
