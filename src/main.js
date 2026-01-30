@@ -103,12 +103,13 @@ elements.form.addEventListener('submit', (e) => {
       watchedState.form.status = 'valid';
       watchedState.form.error = null;
     })
-   .catch((err) => {
-
+ .catch((err) => {
   let errorKey = 'errors.network';
 
-  if (err.message) {
+  if (err.name === 'ValidationError') {
     errorKey = err.message;
+  } else if (err.message === 'parseError') {
+    errorKey = 'errors.parseError';
   }
 
   watchedState.form.error = errorKey;
