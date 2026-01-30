@@ -36,7 +36,8 @@ const state = {
 // DOM
 const elements = {
   form: document.querySelector('form'),
-  input: document.querySelector('input'),
+  input: document.querySelector('input[name="url"]'),
+  feedback: document.querySelector('.feedback'), // ← ВАЖНО
   modal: document.querySelector('#modal'),
 };
 
