@@ -19,4 +19,3 @@ export default (url, feeds) => {
 
   return schema.validate(url)
 }
-

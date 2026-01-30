@@ -1,12 +1,10 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const proxyUrl = 'https://allorigins.hexlet.app/get';
+const proxyUrl = 'https://allorigins.hexlet.app/get'
 
-export const fetchRss = (url) => {
-  return axios.get(proxyUrl, {
-    params: {
-      url,
-      disableCache: true,
-    },
-  });
-};
+export const fetchRss = url => axios.get(proxyUrl, {
+  params: {
+    url,
+    disableCache: true,
+  },
+})
