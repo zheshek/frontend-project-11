@@ -23,7 +23,7 @@ const updateFeeds = (state) => {
           state.posts.push(...newPosts)
         }
       })
-      .catch(() => null)
+      .catch(() => null),
   )
 
   Promise.all(promises).finally(() => {

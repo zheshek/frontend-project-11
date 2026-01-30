@@ -108,7 +108,7 @@ elements.form.addEventListener('submit', (e) => {
       if (err.name === 'ValidationError') {
         errorKey = err.message
       }
-       else if (err.message === 'parseError') {
+      else if (err.message === 'parseError') {
         errorKey = 'errors.parseError'
       }
 
