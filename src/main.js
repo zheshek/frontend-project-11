@@ -19,7 +19,6 @@ i18next.init({
   },
 });
 
-// состояние (НОРМАЛИЗОВАННОЕ)
 const state = {
   form: {
     status: 'filling', // filling | loading | error | valid
@@ -65,7 +64,6 @@ postsContainer.addEventListener('click', (e) => {
     watchedState.ui.viewedPosts.push(postId);
   }
 
-  // открываем модалку
   watchedState.ui.activePostId = postId;
 });
 // submit
@@ -106,9 +104,14 @@ elements.form.addEventListener('submit', (e) => {
       watchedState.form.error = null;
     })
    .catch((err) => {
-  watchedState.form.status = 'error';
 
-  const errorKey = err.message ?? 'errors.network';
+  let errorKey = 'errors.network';
+
+  if (err.message) {
+    errorKey = err.message;
+  }
+
   watchedState.form.error = errorKey;
+  watchedState.form.status = 'error';
 });
 });

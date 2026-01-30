@@ -3,7 +3,7 @@ export default (data) => {
   const doc = parser.parseFromString(data, 'application/xml');
 
   if (doc.querySelector('parsererror')) {
-    throw new Error('parseError');
+    throw new Error('errors.parseError');
   }
 
   const feed = {
@@ -18,4 +18,3 @@ export default (data) => {
 
   return { feed, posts };
 };
-

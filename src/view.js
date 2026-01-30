@@ -57,7 +57,6 @@ const renderModal = (state, modalElement) => {
 export default (elements, state) => (path, value) => {
   const { input, modal, feedback } = elements;
 
-  // статус формы
   if (path === 'form.status') {
     if (value === 'loading') {
       input.classList.remove('is-invalid');
@@ -66,8 +65,10 @@ export default (elements, state) => (path, value) => {
 
     if (value === 'error') {
       input.classList.add('is-invalid');
+
       feedback.classList.remove('text-success');
       feedback.classList.add('text-danger');
+      feedback.textContent = i18next.t(state.form.error);
     }
 
     if (value === 'valid') {
@@ -79,11 +80,6 @@ export default (elements, state) => (path, value) => {
       feedback.classList.add('text-success');
       feedback.textContent = i18next.t('success');
     }
-  }
-
-  // текст ошибки
-  if (path === 'form.error' && value) {
-    feedback.textContent = i18next.t(value);
   }
 
   if (path === 'feeds') {
@@ -98,3 +94,4 @@ export default (elements, state) => (path, value) => {
     renderModal(state, modal);
   }
 };
+
